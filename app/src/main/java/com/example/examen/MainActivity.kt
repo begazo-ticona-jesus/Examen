@@ -3,10 +3,13 @@ package com.example.examen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.AlertDialog
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
+import com.example.examen.Lista.Dialog
 import com.example.examen.Lista.Editar
+import com.example.examen.Lista.ItemDetail
 import com.example.examen.Lista.ListaReportes
 import com.example.examen.Navigation.Rutas
 
@@ -26,6 +29,12 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(Rutas.Editar.route){
                     Editar(navController = navController)
+                }
+                composable(Rutas.Dialog.route){
+                    Dialog(navController = navController)
+                }
+                composable(Rutas.ScreenDetail.route){
+                    ItemDetail(navController = navController)
                 }
             }
         }

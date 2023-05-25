@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,32 +25,20 @@ import com.example.examen.R
 
 @Composable
 fun ListaReportes(navController: NavController){
-    TopAppBar(
-        backgroundColor = Color.DarkGray,
-    ) {
-        IconButton(onClick = {
-            navController.navigate(Rutas.Editar.route)
-        }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = "Retroceder",
-                tint = Color.White
-            )
-        }
-        Text(
-            text = "Reportes",
-            style = TextStyle(
-                fontSize = 30.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                textAlign = TextAlign.Center
-            )
+    Text(
+        text = "Mis reportes",
+        modifier = Modifier.fillMaxSize().padding(10.dp),
+        style = TextStyle(
+            fontSize = 30.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.DarkGray,
+            textAlign = TextAlign.Center
         )
-    }
+    )
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp, 60.dp, 10.dp, 10.dp),
+            .padding(10.dp,60.dp,10.dp,0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
         for (i in 1..10) {
@@ -88,40 +78,51 @@ fun itemReport (i:Int, navController: NavController){
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(R.drawable.ic_baseline_report_24),
-            contentDescription = "Image description",
+        Box(
             modifier = Modifier
-                .padding(10.dp, 0.dp)
-                .size(100.dp)
-        )
-        Column {
-            Text(
-                modifier = Modifier
-                    .width(100.dp)
-                    .padding(0.dp, 10.dp),
-                text = "Reporte: $i"
-            )
-            val t1 = "Descripciónszlknzflksndfoljawssndfl lsdfnmaiksndfq fdwpofjwoainfonwasddlofnasolñdnfasldofn"
-            val t2 = "Ddwpofjwoainfonwasddlofnasolñdnfasldofn"
-            var t3 = ""
-            if (i%2 ==0){
-                t3 = t2
-            }else{
-                t3 = t1
+                .clickable {
+                    navController.navigate(Rutas.ScreenDetail.route)
+                }
+        ) {
+            Row (verticalAlignment = Alignment.CenterVertically){
+                Image(
+                    painter = painterResource(R.drawable.ic_baseline_report_24),
+                    contentDescription = "Image description",
+                    modifier = Modifier
+                        .padding(10.dp, 0.dp)
+                        .size(100.dp)
+                )
+                Column {
+                    Text(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .padding(0.dp, 10.dp),
+                        text = "Reporte: $i"
+                    )
+                    val t1 = "Descripciónszlknzflksndfoljawssndfl lsdfnmaiksndfq fdwpofjwoainfonwasddlofnasolñdnfasldofn"
+                    val t2 = "Ddwpofjwoainfonwasddlofnasolñdnfasldofn"
+                    var t3 = ""
+                    if (i%2 ==0){
+                        t3 = t2
+                    }else{
+                        t3 = t1
+                    }
+                    Text(
+                        modifier = Modifier
+                            .width(150.dp)
+                            .padding(0.dp, 10.dp),
+                        text = t3
+                    )
+                }
             }
-            Text(
-                modifier = Modifier
-                    .width(150.dp)
-                    .padding(0.dp, 10.dp),
-                text = t3
-            )
         }
         Column(
             verticalArrangement = Arrangement.Center
         ) {
             IconButton(
-                onClick = {navController.navigate(Rutas.Editar.route)}
+                onClick = {
+                    navController.navigate(Rutas.Editar.route)
+                }
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_edit_24),
@@ -132,7 +133,7 @@ fun itemReport (i:Int, navController: NavController){
                 )
             }
             IconButton(
-                onClick = { navController.navigate(Rutas.Editar.route)}
+                onClick = { navController.navigate(Rutas.Dialog.route)}
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_delete_24),
